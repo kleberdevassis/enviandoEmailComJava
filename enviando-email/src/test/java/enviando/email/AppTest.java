@@ -1,58 +1,26 @@
 package enviando.email;
 
-import java.util.Properties;
-
-import javax.mail.Address;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 public class AppTest {
 
-	private String userName = "kleberdevassis@gmail.com";
-	private String senha = "ukrvxffjaneefxnk";
-
 	@org.junit.Test // junit serve para testes verificações e tambem como metodo main
-	public void testEmail() {
+	public void testEmail() throws Exception {
+		
+		StringBuilder stringBuilderTextoEmail  = new StringBuilder();
+		
+		stringBuilderTextoEmail.append("ola, <br/><br/>");
+		stringBuilderTextoEmail.append("Voce esta recebendo o acesso ao curso de Java.<br/><br/>");
+		stringBuilderTextoEmail.append("Para ter acesso clique no botão abaixo.<br/><br/>");
+		stringBuilderTextoEmail.append("<b>Login:</b> alex@jsjsjsj.com<br/>");
+		stringBuilderTextoEmail.append("<b>Senha:</b>kjlelsdlshe<br/><br/>");
+		stringBuilderTextoEmail.append("<a target=\"_blank\"href=\"http://projetojavaweb.com/certificado-aluno/login\" style=\"color:#2525a7; padding 14px 25px; text-align:center; text-decoration: none; display:inline-block; border-radius:30px; font-size:20px; font-family:courier; border : 3px solid green;background-color:#99DA39;\">Acessar Portal do Aluno</a><br/><br/>");
 
-		try {
-			Properties properties = new Properties();
-			properties.put("mail.smtp.auth", "true");/* autorização */
-			properties.put("mail.smtp.starttls", "true");/* autenticação */
-			properties.put("mail.smtp.host", "smtp.gmail.com");/* Servidor gmail Google */
-			properties.put("mail.smtp.port", "465");/* Porta do servidor */
-			properties.put("mail.smtp.socketFactory.port", "465");/* Expecifica a porta a ser conectada pelo socket */
-			properties.put("mail.smtp.socketFactory.class",
-					"javax.net.ssl.SSLSocketFactory");/* Classe socket de conexão ao SMTP */
+		stringBuilderTextoEmail.append("<span style=\"font-size:8px\">Ass.: kleberdevJavaAssis</span>");
+		
+		
+		ObjetoEnviaEmail enviaEmail = new ObjetoEnviaEmail("kleberdevassis@gmail.com", "kleberdevassis",
+				"testandoEmailComJava", stringBuilderTextoEmail.toString());
 
-			Session session = Session.getInstance(properties, new Authenticator() {
-				@Override
-				protected PasswordAuthentication getPasswordAuthentication() {
-
-					return new PasswordAuthentication(userName, senha);
-				}
-
-			});
-
-			Address[] toUser = InternetAddress.parse("kleberdevassis@gmail.com , passouporaqui@gmail.com");
-
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(userName));/* quem está enviando */
-			message.setRecipients(Message.RecipientType.TO, toUser);
-			message.setSubject("Chegou e-mail enviado com java");/* Assunto do e-mail */
-			message.setText(
-					"Ola programador, vc acaba de receber um e_mail enviado com Java do curso Formação de Java com Alex");
-
-			Transport.send(message);
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		enviaEmail.enviarEmail(true);
 
 	}
 
