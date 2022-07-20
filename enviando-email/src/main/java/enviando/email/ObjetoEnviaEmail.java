@@ -127,7 +127,7 @@ public class ObjetoEnviaEmail {
 		}else {
 			corpoEmail.setText(textoEmail);
 		}
-		
+		//erro no list
 		java.util.List<E>
 		
 		/*Parte 2 do e-mail que são os anexo em pdf*/
