@@ -3,8 +3,16 @@ package br.com.emailproject.model;
 public class Email {
 
 	private String destinatario;
-	private String assungo;
+	private String assunto;
 	private String texto;
+	
+	
+
+	public Email(String destinatario, String assunto, String texto) {
+		this.destinatario = destinatario;
+		this.assunto = assunto;
+		this.texto = texto;
+	}
 
 	public String getDestinatario() {
 		return destinatario;
@@ -14,12 +22,12 @@ public class Email {
 		this.destinatario = destinatario;
 	}
 
-	public String getAssungo() {
-		return assungo;
+	public String getAssunto() {
+		return assunto;
 	}
 
-	public void setAssungo(String assungo) {
-		this.assungo = assungo;
+	public void setAssunto(String assunto) {
+		this.assunto = assunto;
 	}
 
 	public String getTexto() {
